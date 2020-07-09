@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  catalogue:
+    image: schoolofdevops/catalogue
+    hostname: catalogue
+    restart: always
+    environment:
+      - reschedule:on-node-failure
+  catalogue-db:
+    image: schoolofdevops/catalogue-db
+    hostname: catalogue-db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=""
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_DATABASE=socksdb
+  front-end:
+    image: schoolofdevops/frontend
+    hostname: front-end
+    restart: always
+    ports:
+      - '80:8080'
